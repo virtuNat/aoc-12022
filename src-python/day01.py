@@ -3,10 +3,11 @@ from aoc import get_input
 
 def main():
     with get_input(__file__) as ifile:
-        pass
+        elves = ifile.read().split('\n\n')
+    cals = sorted(sum(int(c) for c in elf.split()) for elf in elves)
 
-    print(None) # 1
-    print(None) # 2
+    print(cals[-1]) # 1
+    print(sum(cals[-3:])) # 2
 
 if __name__ == '__main__':
     main()

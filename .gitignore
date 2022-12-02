@@ -3,5 +3,11 @@
 *.exe
 *.hi
 *.o
+*.filters
+*.user
+*.vcxproj
+*.sln
+*.vs
+**x64
 __pycache__
 build

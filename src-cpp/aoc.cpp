@@ -1,23 +1,23 @@
 #include "aoc.h"
 
-AoCSolution::AoCSolution(uint8_t day, std::function<int(std::ifstream)> soln)
-	: _day(day), _soln(soln)
+AoCSolution::AoCSolution(uint8_t day, std::function<Solution(std::ifstream)> solver)
+	: _day(day), _solver(solver)
 {
 }
 
-uint8_t AoCSolution::getDay()
+std::string AoCSolution::getDay()
 {
-	return _day;
+	return std::to_string(_day);
 }
 
-uint64_t AoCSolution::runSolution(int &status)
+uint64_t AoCSolution::runSolution(Solution &soln)
 {
 	std::ostringstream fname;
 	fname << "../input/day" 
-		  << std::setfill('0') << std::setw(2) << std::to_string(_day) 
+		  << std::setfill('0') << std::setw(2) << getDay()
 		  << ".txt";
 	auto time_start = std::chrono::high_resolution_clock::now();
-	status = _soln(std::ifstream(fname.str()));
+	soln = _solver(std::ifstream(fname.str()));
 	return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time_start).count();
 }
 
@@ -25,14 +25,14 @@ void AoCSolution::runBatch(const size_t total)
 {
 	std::unique_ptr<uint64_t[]> times(new uint64_t[total]);
 	dbl median, mean, stdev = 0;
-	int status = 0;
+	Solution soln = Solution();
 
 	for (size_t i = 0; i < total; ++i)
 	{
-		times[i] = runSolution(status);
-		if (status)
+		times[i] = runSolution(soln);
+		if (soln.status)
 		{
-			std::cerr << "Error: Status Code " << status << std::endl;
+			std::cerr << "Error: Status Code " << soln.status << std::endl;
 			return;
 		}
 	}
@@ -51,11 +51,16 @@ void AoCSolution::runBatch(const size_t total)
 	}
 	stdev = std::sqrtl(stdev / (total - 1));
 
-	std::cout << std::setprecision(3) << std::fixed
-			  << "Statistics for Day " << std::to_string(_day) << ":" << std::endl
-			  << "Median runtime: " << median << " us." << std::endl
-			  << "Mean runtime: " << mean << " us." << std::endl
-			  << "Fastest runtime: " << times[0] << " us." << std::endl
-			  << "Longest runtime: " << times[total - 1] << " us." << std::endl
-			  << "Deviation: " << stdev << " us." << std::endl;
+	std::cout << "Solution for Day " << getDay() << ":" << std::endl
+			  << "  Part 1: " << soln.p1 << std::endl
+			  << "  Part 2: " << soln.p2 << std::endl
+			  << std::setprecision(3) << std::fixed
+			  << "------------------------------" << std::endl
+			  << "Statistics for Day " << getDay() << ":" << std::endl
+			  << "  Median runtime: " << median << " us." << std::endl
+			  << "  Mean runtime: " << mean << " us." << std::endl
+			  << "  Fastest runtime: " << times[0] << " us." << std::endl
+			  << "  Longest runtime: " << times[total - 1] << " us." << std::endl
+			  << "  Deviation: " << stdev << " us." << std::endl
+			  << "------------------------------" << std::endl;
 }

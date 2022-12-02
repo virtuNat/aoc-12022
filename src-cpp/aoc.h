@@ -11,14 +11,21 @@
 
 typedef long double dbl;
 
+struct Solution
+{
+	int status;
+	std::string p1;
+	std::string p2;
+};
+
 class AoCSolution
 {
 public:
-	AoCSolution(uint8_t day, std::function<int(std::ifstream)> soln);
-	uint8_t getDay();
-	uint64_t runSolution(int &status);
+	AoCSolution(uint8_t day, std::function<Solution(std::ifstream)> solver);
+	std::string getDay();
+	uint64_t runSolution(Solution &soln);
 	void runBatch(const size_t total);
 private:
 	const uint8_t _day;
-	std::function<int(std::ifstream)> _soln;
+	std::function<Solution(std::ifstream)> _solver;
 };

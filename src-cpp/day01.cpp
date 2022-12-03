@@ -1,27 +1,26 @@
-﻿#include <array>
-#include "aoc.h"
+﻿#include "aoc.h"
 
 Solution day01(std::ifstream ifile) 
 {
 	std::string line;
-	std::array<uint32_t, 3> cals = { 0 };
-	uint32_t cal = 0;
+	uint32_t cal = 0, cal1 = 0, cal2 = 0, cal3 = 0;
+	auto time_start = high_resolution_clock::now();
 	while (std::getline(ifile, line)) {
 		if (line.empty()) {
-			if (cal > cals[0])
+			if (cal > cal1)
 			{
-				cals[2] = cals[1];
-				cals[1] = cals[0];
-				cals[0] = cal;
+				cal3 = cal2;
+				cal2 = cal1;
+				cal1 = cal;
 			}
-			else if (cal > cals[1])
+			else if (cal > cal2)
 			{
-				cals[2] = cals[1];
-				cals[1] = cal;
+				cal3 = cal2;
+				cal2 = cal;
 			}
-			else if (cal > cals[2])
+			else if (cal > cal3)
 			{
-				cals[2] = cal;
+				cal3 = cal;
 			}
 			cal = 0;
 			continue;
@@ -30,14 +29,9 @@ Solution day01(std::ifstream ifile)
 	}
 	Solution soln = Solution();
 	soln.status = 0;
-	soln.p1 = std::to_string(cals[0]);
-	soln.p2 = std::to_string(cals[0] + cals[1] + cals[2]);
+	soln.p1 = std::to_string(cal1);
+	soln.p2 = std::to_string(cal1 + cal2 + cal3);
+	soln.duration = getTimeDiff(time_start);
 	return soln;
 }
 
-int main(int argc, const char* argv[]) 
-{
-	AoCSolution day1(1, day01);
-	day1.runBatch(31);
-	return 0;
-}

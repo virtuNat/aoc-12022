@@ -1,5 +1,10 @@
 #include "aoc.h"
 
+uint64_t getTimeDiff(std::chrono::steady_clock::time_point start)
+{
+	return std::chrono::duration_cast<std::chrono::microseconds>(high_resolution_clock::now() - start).count();
+}
+
 AoCSolution::AoCSolution(uint8_t day, std::function<Solution(std::ifstream)> solver)
 	: _day(day), _solver(solver)
 {
@@ -10,26 +15,32 @@ std::string AoCSolution::getDay()
 	return std::to_string(_day);
 }
 
-uint64_t AoCSolution::runSolution(Solution &soln)
+Solution AoCSolution::runSolution()
 {
 	std::ostringstream fname;
 	fname << "../input/day" 
 		  << std::setfill('0') << std::setw(2) << getDay()
 		  << ".txt";
-	auto time_start = std::chrono::high_resolution_clock::now();
-	soln = _solver(std::ifstream(fname.str()));
-	return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time_start).count();
+	return _solver(std::ifstream(fname.str()));
 }
 
 void AoCSolution::runBatch(const size_t total)
 {
 	std::unique_ptr<uint64_t[]> times(new uint64_t[total]);
+	std::ostringstream fnoss;
+	std::string fname;
 	dbl median, mean, stdev = 0;
-	Solution soln = Solution();
+	Solution soln;
+
+	fnoss << "../input/day"
+		  << std::setfill('0') << std::setw(2) << getDay()
+		  << ".txt";
+	fname = fnoss.str();
 
 	for (size_t i = 0; i < total; ++i)
 	{
-		times[i] = runSolution(soln);
+		soln = _solver(std::ifstream(fname));
+		times[i] = soln.duration;
 		if (soln.status)
 		{
 			std::cerr << "Error: Status Code " << soln.status << std::endl;
@@ -54,13 +65,13 @@ void AoCSolution::runBatch(const size_t total)
 	std::cout << "Solution for Day " << getDay() << ":" << std::endl
 			  << "  Part 1: " << soln.p1 << std::endl
 			  << "  Part 2: " << soln.p2 << std::endl
-			  << std::setprecision(3) << std::fixed
+			  // << std::setprecision(3) << std::fixed
 			  << "------------------------------" << std::endl
 			  << "Statistics for Day " << getDay() << ":" << std::endl
-			  << "  Median runtime: " << median << " us." << std::endl
-			  << "  Mean runtime: " << mean << " us." << std::endl
+			  << "  Median runtime: " << (uint64_t)median << " us." << std::endl
+			  << "  Mean runtime: " << (uint64_t)mean << " us." << std::endl
 			  << "  Fastest runtime: " << times[0] << " us." << std::endl
 			  << "  Longest runtime: " << times[total - 1] << " us." << std::endl
-			  << "  Deviation: " << stdev << " us." << std::endl
+			  << "  Deviation: " << (uint64_t)stdev << " us." << std::endl
 			  << "------------------------------" << std::endl;
 }

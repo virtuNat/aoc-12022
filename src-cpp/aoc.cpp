@@ -19,8 +19,8 @@ Solution AoCSolution::runSolution()
 {
 	std::ostringstream fname;
 	fname << "../input/day" 
-		  << std::setfill('0') << std::setw(2) << getDay()
-		  << ".txt";
+	      << std::setfill('0') << std::setw(2) << getDay()
+	      << ".txt";
 	return _solver(std::ifstream(fname.str()));
 }
 
@@ -33,8 +33,8 @@ void AoCSolution::runBatch(const size_t total)
 	Solution soln;
 
 	fnoss << "../input/day"
-		  << std::setfill('0') << std::setw(2) << getDay()
-		  << ".txt";
+	      << std::setfill('0') << std::setw(2) << getDay()
+	      << ".txt";
 	fname = fnoss.str();
 
 	for (size_t i = 0; i < total; ++i)
@@ -63,15 +63,15 @@ void AoCSolution::runBatch(const size_t total)
 	stdev = std::sqrtl(stdev / (total - 1));
 
 	std::cout << "Solution for Day " << getDay() << ":" << std::endl
-			  << "  Part 1: " << soln.p1 << std::endl
-			  << "  Part 2: " << soln.p2 << std::endl
-			  // << std::setprecision(3) << std::fixed
-			  << "------------------------------" << std::endl
-			  << "Statistics for Day " << getDay() << ":" << std::endl
-			  << "  Median runtime: " << (uint64_t)median << " us." << std::endl
-			  << "  Mean runtime: " << (uint64_t)mean << " us." << std::endl
-			  << "  Fastest runtime: " << times[0] << " us." << std::endl
-			  << "  Longest runtime: " << times[total - 1] << " us." << std::endl
-			  << "  Deviation: " << (uint64_t)stdev << " us." << std::endl
-			  << "------------------------------" << std::endl;
+	          << "  Part 1: " << soln.p1 << std::endl
+	          << "  Part 2: " << soln.p2 << std::endl
+	          // << std::setprecision(3) << std::fixed
+	          << "------------------------------" << std::endl
+	          << "Statistics for Day " << getDay() << ":" << std::endl
+	          << "  Median runtime: " << (uint64_t)median << " us." << std::endl
+	          << "  Mean runtime: " << (uint64_t)mean << " us." << std::endl
+	          << "  Fastest runtime: " << times[0] << " us." << std::endl
+	          << "  Longest runtime: " << times[total - 1] << " us." << std::endl
+	          << "  Deviation: " << (uint64_t)stdev << " us." << std::endl
+	          << "------------------------------" << std::endl;
 }

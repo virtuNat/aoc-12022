@@ -16,7 +16,7 @@ def get_input(file_name):
 
 def main():
     times = []
-    for day in range(1, 3):
+    for day in range(1, 4):
         time = timeit(f'day{day:02}.main()', f'import day{day:02}', number=5)
         times.append(1000*time/5)
 

@@ -27,11 +27,12 @@ Solution day01(std::ifstream ifile)
 		}
 		cal += std::atoi(line.c_str());
 	}
+	uint64_t duration = getTimeDiff(time_start);
 	Solution soln = Solution();
 	soln.status = 0;
 	soln.p1 = std::to_string(cal1);
 	soln.p2 = std::to_string(cal1 + cal2 + cal3);
-	soln.duration = getTimeDiff(time_start);
+	soln.duration = duration;
 	return soln;
 }
 

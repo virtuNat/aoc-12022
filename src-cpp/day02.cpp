@@ -16,14 +16,15 @@ Solution day02(std::ifstream ifile)
 	auto time_start = high_resolution_clock::now();
 	while (std::getline(ifile, line))
 	{
-		size_t idx = ((size_t)line[0] - (int)'A') * 3 + (size_t)line[2] - (int)'X';
+		size_t idx = (size_t)line[0] * 3 + line[2] - 283;
 		score1 += strat1[idx];
 		score2 += strat2[idx];
 	}
+	uint64_t duration = getTimeDiff(time_start);
 	Solution soln = Solution();
 	soln.status = 0;
 	soln.p1 = std::to_string(score1);
 	soln.p2 = std::to_string(score2);
-	soln.duration = getTimeDiff(time_start);
+	soln.duration = duration;
 	return soln;
 }

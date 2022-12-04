@@ -65,13 +65,13 @@ void AoCSolution::runBatch(const size_t total)
 	std::cout << "Solution for Day " << getDay() << ":" << std::endl
 	          << "  Part 1: " << soln.p1 << std::endl
 	          << "  Part 2: " << soln.p2 << std::endl
-	          // << std::setprecision(3) << std::fixed
+	          << std::setprecision(3) << std::fixed
 	          << "------------------------------" << std::endl
 	          << "Statistics for Day " << getDay() << ":" << std::endl
-	          << "  Median runtime: " << (uint64_t)median << " us." << std::endl
-	          << "  Mean runtime: " << (uint64_t)mean << " us." << std::endl
+	          << "  Median runtime: " << median << " us." << std::endl
+	          << "  Mean runtime: " << mean << " us." << std::endl
 	          << "  Fastest runtime: " << times[0] << " us." << std::endl
-	          << "  Longest runtime: " << times[total - 1] << " us." << std::endl
-	          << "  Deviation: " << (uint64_t)stdev << " us." << std::endl
+	          << "  Slowest runtime: " << times[total - 1] << " us." << std::endl
+	          << "  Deviation: " << stdev << " us." << std::endl
 	          << "------------------------------" << std::endl;
 }

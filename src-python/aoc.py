@@ -2,7 +2,7 @@
 from os.path import join as pjoin, split as psplit, splitext as fsplit
 from contextlib import contextmanager
 from statistics import median
-from timeit import timeit
+from timeit import repeat
 
 @contextmanager
 def get_input(file_name):
@@ -17,8 +17,8 @@ def get_input(file_name):
 def main():
     times = []
     for day in range(1, 6):
-        time = timeit(f'day{day:02}.main()', f'import day{day:02}', number=5)
-        times.append(1000*time/5)
+        time = min(repeat(f'day{day:02}.main()', f'import day{day:02}', number=100))
+        times.append(1000*time/100)
 
     total = sum(times)
     print()

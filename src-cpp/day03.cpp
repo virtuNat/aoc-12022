@@ -32,9 +32,6 @@ Solution day03(std::ifstream ifile)
 		getHalves(line1, score1);
 		getHalves(line2, score1);
 		getHalves(line3, score1);
-		set1.clear();
-		set2.clear();
-		set3.clear();
 		temp.clear();
 		set1 = std::set<int>(line1.begin(), line1.end());
 		set2 = std::set<int>(line2.begin(), line2.end());

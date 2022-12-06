@@ -22,7 +22,7 @@ struct Solution
 	int status;
 	std::string p1;
 	std::string p2;
-	uint64_t duration;
+	uint64_t duration = 0;
 };
 
 class AoCSolution

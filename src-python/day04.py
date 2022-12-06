@@ -1,16 +1,16 @@
 #!/usr/bin/env python
-import re
 from aoc import get_input
 
 def main():
-    regex = re.compile(r'(\d+)-(\d+),(\d+)-(\d+)')
     with get_input(__file__) as ifile:
         count = [0, 0]
         for line in ifile:
-            a, b, c, d = re.match(regex, line).groups()
-            if a <= d and b >= c:
+            s1, s2 = line.split(',')
+            a1, b1 = map(int, s1.split('-'))
+            a2, b2 = map(int, s2.split('-'))
+            if a1 <= b2 and b1 >= a2:
                 count[1] += 1
-                if (a <= c and d <= b) or (c <= a and b <= d):
+                if (a1 <= a2 and b2 <= b1) or (a2 <= a1 and b1 <= b2):
                     count[0] += 1
 
     print(count[0]) # 1

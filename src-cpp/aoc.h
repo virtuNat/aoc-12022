@@ -19,7 +19,7 @@ uint64_t getTimeDiff(std::chrono::steady_clock::time_point start);
 
 struct Solution
 {
-	int status;
+	int status = 0;
 	std::string p1;
 	std::string p2;
 	uint64_t duration = 0;

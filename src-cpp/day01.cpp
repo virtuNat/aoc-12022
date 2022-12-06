@@ -2,6 +2,7 @@
 
 Solution day01(std::ifstream ifile) 
 {
+	Solution soln = Solution();
 	std::string line;
 	uint32_t cal = 0, cal1 = 0, cal2 = 0, cal3 = 0;
 	auto time_start = high_resolution_clock::now();
@@ -27,12 +28,9 @@ Solution day01(std::ifstream ifile)
 		}
 		cal += std::atoi(line.c_str());
 	}
-	uint64_t duration = getTimeDiff(time_start);
-	Solution soln = Solution();
-	soln.status = 0;
 	soln.p1 = std::to_string(cal1);
 	soln.p2 = std::to_string(cal1 + cal2 + cal3);
-	soln.duration = duration;
+	soln.duration = getTimeDiff(time_start);
 	return soln;
 }
 

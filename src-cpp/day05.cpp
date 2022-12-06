@@ -2,6 +2,7 @@
 
 Solution day05(std::ifstream ifile)
 {
+	Solution soln = Solution();
 	std::string line;
 	std::array<std::string, 9> stacks1, stacks2;
 	int cnt, src, dst;
@@ -38,9 +39,7 @@ Solution day05(std::ifstream ifile)
 		stacks2[dst].insert(0, stacks2[src], 0, cnt);
 		stacks2[src].erase(stacks2[src].begin(), stacks2[src].begin() + cnt);
 	}
-	uint64_t duration = getTimeDiff(time_start);
-	Solution soln = Solution();
-	soln.status = 0;
+	
 	for (std::string str : stacks1)
 	{
 		soln.p1 += str.front();
@@ -49,6 +48,6 @@ Solution day05(std::ifstream ifile)
 	{
 		soln.p2 += str.front();
 	}
-	soln.duration = duration;
+	soln.duration = getTimeDiff(time_start);
 	return soln;
 }

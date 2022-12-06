@@ -20,6 +20,7 @@ int getHalves(std::string line, uint16_t &score)
 
 Solution day03(std::ifstream ifile)
 {
+	Solution soln = Solution();
 	std::string line1, line2, line3;
 	std::set<int> set1, set2, set3, temp;
 	uint16_t score1 = 0, score2 = 0;
@@ -49,11 +50,8 @@ Solution day03(std::ifstream ifile)
 		);
 		score2 += *output - (*output < 97 ? 38 : 96);
 	}
-	uint64_t duration = getTimeDiff(time_start);
-	Solution soln = Solution();
-	soln.status = 0;
 	soln.p1 = std::to_string(score1);
 	soln.p2 = std::to_string(score2);
-	soln.duration = duration;
+	soln.duration = getTimeDiff(time_start);
 	return soln;
 }

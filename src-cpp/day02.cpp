@@ -11,6 +11,7 @@ constexpr uint16_t strat2[9] =
 
 Solution day02(std::ifstream ifile)
 {
+	Solution soln = Solution();
 	std::string line;
 	uint16_t score1 = 0, score2 = 0;
 	auto time_start = high_resolution_clock::now();
@@ -20,11 +21,8 @@ Solution day02(std::ifstream ifile)
 		score1 += strat1[idx];
 		score2 += strat2[idx];
 	}
-	uint64_t duration = getTimeDiff(time_start);
-	Solution soln = Solution();
-	soln.status = 0;
 	soln.p1 = std::to_string(score1);
 	soln.p2 = std::to_string(score2);
-	soln.duration = duration;
+	soln.duration = getTimeDiff(time_start);
 	return soln;
 }

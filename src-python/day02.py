@@ -13,10 +13,10 @@ strat2 = {
     }
 
 def main():
-    with get_input(__file__) as ifile:
-        score = [0, 0]
+    score = [0, 0]
+    with get_input(__file__) as ifile:        
         for line in ifile:
-            line = line.strip()
+            line = line[:3]
             score[0] += strat1[line]
             score[1] += strat2[line]
 

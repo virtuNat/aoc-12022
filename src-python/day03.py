@@ -2,9 +2,9 @@
 from aoc import get_input
 
 def main():
+    score = [0, 0]
+    lines = []
     with get_input(__file__) as ifile:
-        score = [0, 0]
-        lines = []
         for line in ifile:
             line = line.strip()
             half = len(line) // 2

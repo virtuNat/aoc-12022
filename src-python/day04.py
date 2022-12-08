@@ -2,8 +2,8 @@
 from aoc import get_input
 
 def main():
+    count = [0, 0]
     with get_input(__file__) as ifile:
-        count = [0, 0]
         for line in ifile:
             s1, s2 = line.split(',')
             a1, b1 = map(int, s1.split('-'))

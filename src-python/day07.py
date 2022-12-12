@@ -15,10 +15,10 @@ def main():
             if line.startswith('$ cd'):
                 if line[-2] == '.':
                     stack.pop()
-                else:
-                    dsize.append(0)
-                    stack.append(index)
-                    index += 1
+                    continue
+                dsize.append(0)
+                stack.append(index)
+                index += 1
 
     print(sum(v for v in dsize if v <= 100000)) # 1
     fspace = dsize[0] - 40000000

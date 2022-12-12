@@ -1,4 +1,5 @@
 #include "aoc.h"
+#include <array>
 
 Solution day06(std::ifstream ifile)
 {

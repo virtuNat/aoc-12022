@@ -21,7 +21,7 @@ def get_input(file_name):
 
 def main():
     times = []
-    for day in range(1, 9):
+    for day in range(1, 12):
         time = min(repeat(f'day{day:02}.main()', f'import day{day:02}', number=100))
         times.append(1000*time/100)
 
